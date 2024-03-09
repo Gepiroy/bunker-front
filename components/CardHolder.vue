@@ -12,7 +12,9 @@
 .card-holder {
   display: flex;
   gap: 10px;
-  
+  flex-wrap: wrap;
+  border: 1px dotted black;
+  padding: 4px;
 }
 </style>
 
