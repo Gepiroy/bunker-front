@@ -1,12 +1,16 @@
 <template>
   <main v-if="gameState">
-    <h1>Page!</h1>
+    <h1>Апокалипсис:</h1>
     <Card :cardData="gameState.game_state.apocalypse"></Card>
-    <p>{{ collectCards(gameState.you.cards) }}</p>
-    <p>{{ rawCards(collectCards(gameState.you.cards)) }}</p>
+    <h1>Бункер:</h1>
     <card-holder
       :cardsData="gameState.game_state.bunker_modificators"
     />
+    <h1>Игроки:</h1>
+    <div v-for="(player, index) in gameState.others" :key="index">
+      <h2>{{ index }}</h2>
+    </div>
+    <h1>Ты:</h1>
     <card-holder
       :cardsData="rawCards(collectCards(gameState.you.cards))"
     />
