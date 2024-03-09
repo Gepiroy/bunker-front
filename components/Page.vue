@@ -1,11 +1,23 @@
 <template>
-  <h1>Page! {{ pageTitle }}</h1>
+  <main v-if="gameState">
+    <h1>Page!</h1>
+    <Card :cardData="gameState.game_state.apocalypse"></Card>
+    <p>{{ gameState.game_state.bunker_modificators }}</p>
+    <card-holder :cardsData="gameState.game_state.bunker_modificators"></card-holder>
+
+  </main>
 </template>
 
-<style scoped></style>
+<style>
+</style>
 
 <script>
 export default {
+  data(){
+    return {
+      gameState: null
+    }
+  },
   mounted() {
     this.socket = this.$nuxtSocket({
     })
@@ -14,6 +26,7 @@ export default {
     .on('game-state', (msg, cb) => {
       /* Handle event */
       console.log(msg)
+      this.gameState = msg
     })
   },
   methods: {

@@ -4,24 +4,24 @@
 
 <template>
   <article class="card">
-    <h3>{{ title }}</h3>
-    <p>{{ lore }}</p>
+    <h3>{{ cardData.title }}</h3>
+    <p>{{ cardData.lore }}</p>
   </article>
 </template>
 
 <style scoped>
   .card{
     background: transparent;
-    border: 1px solid white;
+    border: 1px solid black;
     border-radius: 10px;
     padding: 10px;
   }
 </style>
 <script>
 export default {
+  components: true,
   props: {
-    title: String,
-    lore: String
+    cardData: null
   }
 }
 </script>
