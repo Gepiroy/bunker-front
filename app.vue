@@ -1,5 +1,7 @@
+<script setup>
+import Page from "./components/Page.vue"
+</script>
+
 <template>
-  <div>
-    <NuxtWelcome />
-  </div>
+  <Page></Page>
 </template>
