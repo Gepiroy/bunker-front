@@ -9,10 +9,14 @@
     <h1>Игроки:</h1>
     <div v-for="(player, index) in gameState.others" :key="index">
       <h2>{{ index }}</h2>
+      <card-holder
+        :cardsData="rawCards(collectCards(player.cards))"
+      />
     </div>
     <h1>Ты:</h1>
     <card-holder
       :cardsData="rawCards(collectCards(gameState.you.cards))"
+      yourCards="true"
     />
   </main>
 </template>
@@ -33,7 +37,7 @@ export default {
     };
   },
   mounted() {
-    this.socket = this.$nuxtSocket({});
+    this.socket = this.$nuxtSocket({persist: 'main'});
     /* Listen for events: */
     this.socket.on("game-state", (msg, cb) => {
       /* Handle event */
@@ -66,7 +70,7 @@ export default {
     rawCards(cardArray){
       let ret = [];
       cardArray.forEach(card => {
-        ret.push(card.card)
+        ret.push(card)
       });
       return ret;
     }

@@ -4,6 +4,7 @@
       v-for="(card, index) in cardsData"
       :key="index"
       :cardData="card"
+      :yourCard="yourCards"
     ></Card>
   </div>
 </template>
@@ -23,6 +24,7 @@ export default {
   components: true,
   props: {
     cardsData: Object,
+    yourCards: false
   },
 };
 </script>

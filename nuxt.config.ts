@@ -9,8 +9,8 @@ export default defineNuxtConfig({
     sockets: [
       {
         name: "main",
-        url: "http://localhost:81",
-        default: true
+        url: "http://26.215.229.91:81",
+        default: true,
       },
     ],
   },
