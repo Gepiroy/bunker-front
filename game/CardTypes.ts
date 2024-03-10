@@ -11,16 +11,18 @@ class CardType {
   }
 }
 
-const CardTypes = [ //Типа енума из java, где под числовыми ключами лежат объекты.
-  new CardType("Профессия"),
-  new CardType("Хобби"),
-  new CardType("Здоровье"),
-  new CardType("Рюкзак"),
-  new CardType("Личный факт"),
-  new CardType("Факт"),
-  new CardType("Способность"),
-  new CardType("Бункер"),
-  new CardType("Апокалипсис"),
+const CardTypes = [
+  //Типа енума из java, где под числовыми ключами лежат объекты.
+  new CardType("Биология", "#c60"),
+  new CardType("Профессия", "#ddd"),
+  new CardType("Хобби", "#080"),
+  new CardType("Здоровье", "#800"),
+  new CardType("Рюкзак", "#840"),
+  new CardType("Личный факт", "#48a"),
+  new CardType("Факт", "#096"),
+  new CardType("Способность", "#808"),
+  new CardType("Бункер", "#000"),
+  new CardType("Апокалипсис", "#f50"),
 ];
 
 export default CardTypes;

@@ -9,6 +9,10 @@
   >
     <div class="card-header">
       <h3>{{ cardType.title }}</h3>
+      <div v-if="yourCard">
+        <img v-if="cardData.show" src="~/assets/img/card_icons/status_shown.svg" class="card-header__status-icon">
+        <img v-else src="~/assets/img/card_icons/status_unshown.svg" class="card-header__status-icon">
+      </div>
     </div>
     <div class="card-content">
       <p>{{ cardData.scheme.lore }}</p>
@@ -21,6 +25,7 @@
 
 <style scoped>
 .card {
+  position: relative;
   display: grid;
   grid-template-rows: min-content auto min-content;
   background: transparent;
@@ -35,8 +40,15 @@
   display: flex;
   padding: 10px;
   color: #ec0;
-  background: #000;
+  background: #030;
   justify-content: center;
+}
+.card-header__status-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
 }
 .card-content{
   display: flex;
