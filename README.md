@@ -1,3 +1,7 @@
+# Развёртка:
+1. Поменять адрес бэка в nuxt.config.js:io/sockets на тот, что указан в вашей LAN (можно и localhost для теста с одного компа или адрес сервера-хоста с бэком).
+2. npm run dev - сайт будет доступен по http://<host>:8000/
+
 # Nuxt 3 Minimal Starter
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
