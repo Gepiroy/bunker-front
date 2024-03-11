@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   devServer: {
     port: 8000,
   },
-  modules: ["nuxt-socket-io"],
+  modules: ["nuxt-socket-io", "@pinia/nuxt"],
   io: {
     // module options
     sockets: [
@@ -14,7 +14,5 @@ export default defineNuxtConfig({
       },
     ],
   },
-  css: [
-    '~/assets/styles/global.css',
-  ]
+  css: ["~/assets/styles/global.css"],
 });

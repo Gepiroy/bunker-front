@@ -1,29 +1,27 @@
+<script setup></script>
+
 <template>
-  <main v-if="gameState">
+  <main v-if="gameState.game_state">
     <h1>Апокалипсис:</h1>
     <Card :cardData="gameState.game_state.apocalypse"></Card>
     <h1>Бункер:</h1>
-    <card-holder
-      :cardsData="gameState.game_state.bunker_modificators"
-    />
+    <card-holder :cardsData="gameState.game_state.bunker_modificators" />
     <h1>Игроки:</h1>
     <div v-for="(player, index) in gameState.others" :key="index">
       <h2>{{ player.name }}</h2>
-      <card-holder
-        :cardsData="rawCards(collectCards(player.cards))"
-      />
+      <card-holder :cardsData="rawCards(collectCards(player.cards))" />
     </div>
     <h1>Ты (<change-name :current_name="gameState.you.name" />):</h1>
     <card-holder
       :cardsData="rawCards(collectCards(gameState.you.cards))"
       yourCards="true"
     />
+    <overlay-card-shown :by="cardShown_by" :cardData="cardShown_card"></overlay-card-shown>
   </main>
-  <page-overlay closeDelay=1000></page-overlay>
 </template>
 
 <style>
-main{
+main {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -34,16 +32,18 @@ main{
 export default {
   data() {
     return {
-      gameState: null,
+      cardShown_by: null,
+      cardShown_card: null,
+      gameState: useGameStore(),
     };
   },
   mounted() {
-    this.socket = this.$nuxtSocket({persist: 'main'});
-    /* Listen for events: */
+    this.socket = this.$nuxtSocket({ persist: "main" });
     this.socket.on("game-state", (msg, cb) => {
-      /* Handle event */
-      console.log(msg);
-      this.gameState = msg;
+      console.log("recieved game-state message on socket:");
+      console.log(msg)
+      this.gameState.update(msg);
+      console.log("game state updated.");
     });
   },
   methods: {
@@ -56,13 +56,13 @@ export default {
       }
       return ret;
     },
-    rawCards(cardArray){
+    rawCards(cardArray) {
       let ret = [];
-      cardArray.forEach(card => {
-        ret.push(card)
+      cardArray.forEach((card) => {
+        ret.push(card);
       });
       return ret;
-    }
+    },
   },
 };
 </script>
