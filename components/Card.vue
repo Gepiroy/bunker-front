@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="card-content">
-      <p style="white-space: pre-wrap;">{{ cardContent }}</p>
+      <p style="white-space: pre-wrap">{{ cardContent }}</p>
     </div>
     <div class="card-footer">
       <h3>{{ cardData.scheme.title }}</h3>
@@ -125,10 +125,13 @@ export default {
             : "Бабуля";
 
         let ret = displayGender + "\n";
-        ret += age + " лет\n";
-        ret += orientation+"\n";
+        let postfix = "лет";
+        if (age > 20 && age % 10 == 1) postfix = "год";
+        if (age > 20 && age % 10 > 1 && age % 10 < 5) postfix = "года";
+        ret += age + " " + postfix + "\n";
+        ret += orientation + "\n";
         ret += nationality;
-        console.log('generated card: '+ret);
+        console.log("generated card: " + ret);
         return ret;
       }
       return cardData.scheme.lore;
