@@ -97,7 +97,7 @@ export default {
   },
   methods: {
     showCard: function () {
-      if(!yourCard) return;
+      if(!this.yourCard) return;
       this.socket.emit(
         "shownCard",
         {
