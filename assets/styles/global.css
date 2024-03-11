@@ -1,5 +1,11 @@
+@font-face {
+  font-family: roboto;
+  src: url('~/assets/fonts/Roboto-Regular.ttf');
+}
 p, a, h1, h2, h3, h4, h5, h6{
   margin: 0;
+  font-family: roboto;
+  font-weight: 500;
 }
 input{
   padding: 4px 8px;

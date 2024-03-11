@@ -65,6 +65,7 @@
   color: #fff;
   background: #000;
   justify-content: center;
+  text-align: center;
 }
 .shown {
   border-color: #b33f11;
