@@ -35,6 +35,7 @@
   height: 300px;
   overflow: hidden;
   box-shadow: 1px 2px 4px 0px #000;
+  user-select: none;
 }
 .card-header {
   display: flex;
@@ -96,6 +97,7 @@ export default {
   },
   methods: {
     showCard: function () {
+      if(!yourCard) return;
       this.socket.emit(
         "shownCard",
         {

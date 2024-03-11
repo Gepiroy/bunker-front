@@ -8,12 +8,12 @@
     />
     <h1>Игроки:</h1>
     <div v-for="(player, index) in gameState.others" :key="index">
-      <h2>{{ index }}</h2>
+      <h2>{{ player.name }}</h2>
       <card-holder
         :cardsData="rawCards(collectCards(player.cards))"
       />
     </div>
-    <h1>Ты:</h1>
+    <h1>Ты (<change-name :current_name="gameState.you.name" />):</h1>
     <card-holder
       :cardsData="rawCards(collectCards(gameState.you.cards))"
       yourCards="true"
@@ -46,18 +46,6 @@ export default {
     });
   },
   methods: {
-    method1() {
-      /* Emit events */
-      this.socket.emit(
-        "message",
-        {
-          hello: "world",
-        },
-        (resp) => {
-          /* Handle response, if any */
-        }
-      );
-    },
     collectCards(scope) {
       let ret = [];
       for (let cardarray in scope) {
