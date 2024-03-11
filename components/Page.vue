@@ -19,6 +19,7 @@
       yourCards="true"
     />
   </main>
+  <page-overlay closeDelay=1000></page-overlay>
 </template>
 
 <style>
