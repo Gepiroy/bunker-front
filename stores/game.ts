@@ -10,6 +10,13 @@ export const useGameStore = defineStore("gameStore", {
       this.others = gameState.others;
       this.you = gameState.you;
     },
+    updateDemonstration(dem: any){
+      console.log('dem before:')
+      console.log(this.game_state.demonstration);
+      this.game_state.demonstration = dem;
+      console.log("dem after:");
+      console.log(this.game_state.demonstration);
+    }
   },
   getters: {
     getPlayerById: (state) => {

@@ -16,7 +16,7 @@
       :cardsData="rawCards(collectCards(gameState.you.cards))"
       yourCards="true"
     />
-    <overlay-card-shown :by="cardShown_by" :cardData="cardShown_card"></overlay-card-shown>
+    <overlay-card-shown></overlay-card-shown>
   </main>
 </template>
 
@@ -32,8 +32,6 @@ main {
 export default {
   data() {
     return {
-      cardShown_by: null,
-      cardShown_card: null,
       gameState: useGameStore(),
     };
   },
@@ -44,6 +42,11 @@ export default {
       console.log(msg)
       this.gameState.update(msg);
       console.log("game state updated.");
+    });
+    this.socket.on("demonstration", (msg, cb) => {
+      console.log('got demonstration:')
+      console.log(msg)
+      this.gameState.updateDemonstration(msg)
     });
   },
   methods: {

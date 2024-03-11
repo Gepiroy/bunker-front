@@ -3,10 +3,12 @@ import PageOverlay from "../PageOverlay.vue";
 </script>
 
 <template>
-  <page-overlay v-if="cardData">
-    <h1 class="who-is-showing">{{ by.name }} показывает карту:</h1>
-    <Card :cardData="cardData"></Card>
-    <button v-if="by.id === gameState.you.id" v-bind:onClick="endShow">Завершить показ</button>
+  <page-overlay dem_key="show-card">
+    <span v-if="cardData">
+      <h1 class="who-is-showing">{{ by.name }} показывает карту:</h1>
+      <Card :cardData="cardData"></Card>
+      <button v-if="by.id === gameState.you.id" v-bind:onClick="endShow">Завершить показ</button>
+    </span>
   </page-overlay>
 </template>
 
@@ -29,21 +31,10 @@ export default {
     console.log("overlay-card-shown component mounted.");
     const { getPlayerById } = this.gameState;
     this.socket = this.$nuxtSocket({ persist: "main" });
-    this.socket.on("card-shown", (msg, cb) => {
-      console.log("recieved card-shown message on socket:");
-      console.log(msg);
-      this.by = getPlayerById(msg.by);
-      this.cardData = msg.cardData;
-      console.log("done.");
-    });
-    this.socket.on("card-show-ended", (msg, cb) => {
-      this.by = null;
-      this.cardData = null;
-    });
   },
   methods: {
     endShow() {
-      this.socket.emit('end-show-card', '')
+      this.socket.emit('demonstration', null)
     },
   },
 };

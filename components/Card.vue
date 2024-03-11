@@ -141,12 +141,10 @@ export default {
     showCard: function () {
       if (!this.yourCard) return;
       this.socket.emit(
-        "shownCard",
+        "demonstration",
         {
+          type: 'show-card',
           card_id: this.cardData.id,
-        },
-        (resp) => {
-          /* Handle response, if any */
         }
       );
     },

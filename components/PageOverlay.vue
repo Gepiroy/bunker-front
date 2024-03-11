@@ -26,19 +26,18 @@ export default {
   components: true,
   data() {
     return {
-      alive: true
-    }
+      gameState: useGameStore()
+    };
   },
   props: {
-    closeDelay: 0,
+    dem_key: {
+      type: String
+    },
   },
-  mounted() {
-    console.log("pageOverlay mounted. Delay is " + this.closeDelay);
-    if (this.closeDelay > 0) {
-      setTimeout(() => {
-        this.alive = false;
-      }, this.closeDelay);
+  computed: {
+    alive() {
+      return this.gameState.game_state.demonstration.type == this.dem_key
     }
-  }
+  },
 };
 </script>
