@@ -8,7 +8,7 @@
     <card-holder :cardsData="gameState.game_state.bunker_modificators" />
     <h1>Игроки:</h1>
     <div v-for="(player, index) in gameState.others" :key="index">
-      <h2>{{ player.name }}</h2>
+      <h2>{{ player.name + (player.id==gameState.you.id?' (ты)':'') }}</h2>
       <card-holder :cardsData="rawCards(collectCards(player.cards))" />
     </div>
     <h1>Ты (<change-name :current_name="gameState.you.name" />):</h1>

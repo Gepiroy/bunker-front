@@ -10,12 +10,20 @@
     <div class="card-header">
       <h3>{{ cardType.title }}</h3>
       <div v-if="yourCard">
-        <img v-if="cardData.show" src="~/assets/img/card_icons/status_shown.svg" class="card-header__status-icon">
-        <img v-else src="~/assets/img/card_icons/status_unshown.svg" class="card-header__status-icon">
+        <img
+          v-if="cardData.show"
+          src="~/assets/img/card_icons/status_shown.svg"
+          class="card-header__status-icon"
+        />
+        <img
+          v-else
+          src="~/assets/img/card_icons/status_unshown.svg"
+          class="card-header__status-icon"
+        />
       </div>
     </div>
     <div class="card-content">
-      <p>{{ cardData.scheme.lore }}</p>
+      <p style="white-space: pre-wrap;">{{ cardContent }}</p>
     </div>
     <div class="card-footer">
       <h3>{{ cardData.scheme.title }}</h3>
@@ -51,7 +59,7 @@
   width: 20px;
   height: 20px;
 }
-.card-content{
+.card-content {
   display: flex;
   padding: 10px;
   background: #ec0;
@@ -95,10 +103,40 @@ export default {
     cardType() {
       return CardTypes[this.cardData.scheme.type];
     },
+    cardContent() {
+      let cardData = this.cardData;
+      if (cardData.scheme.type === 0) {
+        let age = cardData.extra.age;
+        let gender = cardData.extra.gender;
+        let orientation = cardData.extra.orientation;
+        let nationality = cardData.extra.nationality;
+
+        let displayGender =
+          age <= 20
+            ? gender === "male"
+              ? "Парень"
+              : "Девушка"
+            : age <= 60
+            ? gender === "male"
+              ? "Мужчина"
+              : "Женщина"
+            : gender === "male"
+            ? "Дед"
+            : "Бабуля";
+
+        let ret = displayGender + "\n";
+        ret += age + " лет\n";
+        ret += orientation+"\n";
+        ret += nationality;
+        console.log('generated card: '+ret);
+        return ret;
+      }
+      return cardData.scheme.lore;
+    },
   },
   methods: {
     showCard: function () {
-      if(!this.yourCard) return;
+      if (!this.yourCard) return;
       this.socket.emit(
         "shownCard",
         {
