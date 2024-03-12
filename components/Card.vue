@@ -49,7 +49,7 @@
   display: flex;
   padding: 10px;
   color: #ec0;
-  background: #030;
+  background: #000;
   justify-content: center;
 }
 .card-header__status-icon {
@@ -131,7 +131,6 @@ export default {
         ret += age + " " + postfix + "\n";
         ret += orientation + "\n";
         ret += nationality;
-        console.log("generated card: " + ret);
         return ret;
       }
       return cardData.scheme.lore;

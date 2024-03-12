@@ -9,11 +9,11 @@
     <h1>Игроки:</h1>
     <div v-for="(player, index) in gameState.others" :key="index">
       <h2>{{ player.name + (player.id==gameState.you.id?' (ты)':'') }}</h2>
-      <card-holder :cardsData="rawCards(collectCards(player.cards))" />
+      <card-holder :cardsData="player.cards" />
     </div>
     <h1>Ты (<change-name :current_name="gameState.you.name" />):</h1>
     <card-holder
-      :cardsData="rawCards(collectCards(gameState.you.cards))"
+      :cardsData="gameState.you.cards"
       yourCards="true"
     />
     <overlay-card-shown></overlay-card-shown>
