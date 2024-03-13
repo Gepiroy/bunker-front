@@ -9,14 +9,16 @@
     <h1>Игроки:</h1>
     <div v-for="(player, index) in gameState.others" :key="index">
       <h2>{{ player.name + (player.id==gameState.you.id?' (ты)':'') }}</h2>
-      <card-holder :cardsData="player.cards" />
+      <card-holder :cardsData="player.cards" :glow="gameState.gameStage.type=='turns' && gameState.gameStage.currentPlayer.id==player.id" />
     </div>
     <h1>Ты (<change-name :current_name="gameState.you.name" />):</h1>
     <card-holder
       :cardsData="gameState.you.cards"
       yourCards="true"
     />
+    <admin-panel v-if="gameState.you.id == Object.keys(gameState.others)[0]" />
     <overlay-card-shown></overlay-card-shown>
+    <alerts-layout></alerts-layout>
   </main>
 </template>
 

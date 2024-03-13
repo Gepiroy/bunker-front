@@ -12,10 +12,10 @@ export const useGameStore = defineStore("gameStore", {
     },
     updateDemonstration(dem: any){
       console.log('dem before:')
-      console.log(this.game_state.demonstration);
-      this.game_state.demonstration = dem;
+      console.log(this.game_state!.demonstration);
+      this.game_state!.demonstration = dem;
       console.log("dem after:");
-      console.log(this.game_state.demonstration);
+      console.log(this.game_state!.demonstration);
     }
   },
   getters: {
@@ -25,5 +25,8 @@ export const useGameStore = defineStore("gameStore", {
         return state.others[id];
       }
     },
+    gameStage(): any{
+      return this.game_state!.game_stage;
+    }
   },
 });
