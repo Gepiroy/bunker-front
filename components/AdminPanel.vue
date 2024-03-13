@@ -3,11 +3,12 @@
 <template>
   <div class="admin-panel">
     <button @click="startGame">Start game</button>
+    <button @click="endStage">End stage</button>
   </div>
 </template>
 
 <style scoped>
-.admin-panel{
+.admin-panel {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -28,16 +29,16 @@ export default {
       gameState: useGameStore(),
     };
   },
-  mounted(){
+  mounted() {
     this.socket = this.$nuxtSocket({ persist: "main" });
   },
   methods: {
-    startGame(){
-      console.log('startGame()')
-      this.socket.emit(
-        "start-game"
-      );
-    }
-  }
+    startGame() {
+      this.socket.emit("start-game");
+    },
+    endStage() {
+      this.socket.emit("end-stage");
+    },
+  },
 };
 </script>

@@ -12,19 +12,22 @@ export const useGameStore = defineStore("gameStore", {
       this.others = gameState.others;
       this.you = gameState.you;
     },
-    updateDemonstration(dem: any){
+    updateStage(gameStage: any) {
+      this.game_stage = gameStage;
+    },
+    updateDemonstration(dem: any) {
       this.game_state!.demonstration = dem;
-    }
+    },
   },
   getters: {
     getPlayerById: (state) => {
       return (id: string) => {
         if (state.you.id === id) return state.you;
         return state.others[id];
-      }
+      };
     },
-    gameStage(): any{
+    gameStage(): any {
       return this.game_stage;
-    }
+    },
   },
 });

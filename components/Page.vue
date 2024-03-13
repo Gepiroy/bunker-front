@@ -9,7 +9,7 @@
     <card-holder :cardsData="gameState.game_state.facts" />
     <h1>Игроки:</h1>
     <div v-for="(player, index) in gameState.others" :key="index">
-      <h2>{{ player.name + (player.id==gameState.you.id?' (ты)':'') }}</h2>
+      <h2>{{ player.name + (player.id==gameState.you.id?' (ты)':'') + (player.isCandidate?'':' (изгнан)') }}</h2>
       <card-holder :cardsData="player.cards" :glow="gameState.gameStage.type=='turns' && gameState.gameStage.currentPlayer.id==player.id" />
       <voting-element v-if="gameState.gameStage.type=='voting'" :player="player"></voting-element>
     </div>
@@ -46,6 +46,11 @@ export default {
       console.log("recieved game-state message on socket:");
       console.log(msg)
       this.gameState.update(msg);
+      console.log("game state updated.");
+    });
+    this.socket.on("game-stage", (msg, cb) => {
+      console.log("updated game-stage:",msg);
+      this.gameState.updateStage(msg);
       console.log("game state updated.");
     });
     this.socket.on("demonstration", (msg, cb) => {

@@ -4,9 +4,10 @@ import PageOverlay from "../PageOverlay.vue";
 
 <template>
   <page-overlay dem_key="show-card">
-    <h1 class="who-is-showing">{{ by.name }} показывает карту:</h1>
+    <h1 v-if="demonstration.by=='server'" class="who-is-showing">Новый модификатор бункера:</h1>
+    <h1 v-else class="who-is-showing">{{ by.name }} показывает карту:</h1>
     <Card :cardData="cardData"></Card>
-    <button v-if="by.id === gameState.you.id" v-bind:onClick="endShow">Завершить показ</button>
+    <button v-if="demonstration.by!='server'&&by.id === gameState.you.id" v-bind:onClick="endShow">Завершить показ</button>
   </page-overlay>
 </template>
 
