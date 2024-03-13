@@ -16,6 +16,7 @@
   align-items: flex-start;
   justify-content: center;
   top: 0px;
+  pointer-events: none;
 }
 </style>
 <script>

@@ -3,7 +3,7 @@
 <template>
   <article
     class="card"
-    :class="{ shown: cardData.show }"
+    :class="{ shown: cardData.show, apocard:cardData.scheme.type==9 }"
     :style="'border-color: ' + cardType.color + ';'"
     v-on:click="showCard"
   >
@@ -40,10 +40,19 @@
   border: 8px solid;
   border-radius: 20px;
   width: 200px;
-  height: 300px;
+  min-height: 300px;
   overflow: hidden;
   box-shadow: 1px 2px 4px 0px #000;
   user-select: none;
+}
+.apocard{
+  width: 250px;
+  min-height: 375px;
+  align-self: center;
+}
+.apocard .card-content{
+  font-size: 12px;
+  padding: 12px 2px;
 }
 .card-header {
   display: flex;

@@ -22,7 +22,7 @@ const CardTypes = [
   new CardType("Факт", "#096"),
   new CardType("Способность", "#808"),
   new CardType("Бункер", "#000"),
-  new CardType("Апокалипсис", "#f50"),
+  new CardType("Апокалипсис", "#e30"),
 ];
 
 export default CardTypes;

@@ -2,10 +2,11 @@
 
 <template>
   <main v-if="gameState.game_state">
-    <h1>Апокалипсис:</h1>
     <Card :cardData="gameState.game_state.apocalypse"></Card>
     <h1>Бункер:</h1>
     <card-holder :cardsData="gameState.game_state.bunker_modificators" />
+    <h1>Факты:</h1>
+    <card-holder :cardsData="gameState.game_state.facts" />
     <h1>Игроки:</h1>
     <div v-for="(player, index) in gameState.others" :key="index">
       <h2>{{ player.name + (player.id==gameState.you.id?' (ты)':'') }}</h2>

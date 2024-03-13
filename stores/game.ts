@@ -1,21 +1,19 @@
 export const useGameStore = defineStore("gameStore", {
   state: () => ({
     game_state: null as any,
+    game_stage: null as any,
     others: null as any,
     you: null as any,
   }),
   actions: {
     update(gameState: any) {
       this.game_state = gameState.game_state;
+      this.game_stage = gameState.game_stage;
       this.others = gameState.others;
       this.you = gameState.you;
     },
     updateDemonstration(dem: any){
-      console.log('dem before:')
-      console.log(this.game_state!.demonstration);
       this.game_state!.demonstration = dem;
-      console.log("dem after:");
-      console.log(this.game_state!.demonstration);
     }
   },
   getters: {
@@ -26,7 +24,7 @@ export const useGameStore = defineStore("gameStore", {
       }
     },
     gameStage(): any{
-      return this.game_state!.game_stage;
+      return this.game_stage;
     }
   },
 });
