@@ -101,6 +101,11 @@
 import CardTypes from "~/game/CardTypes";
 export default {
   components: true,
+  data () {
+    return {
+      gameState: useGameStore()
+    }
+  },
   mounted() {
     this.socket = this.$nuxtSocket({ persist: "main" });
   },
@@ -111,6 +116,10 @@ export default {
   computed: {
     cardType() {
       return CardTypes[this.cardData.scheme.type];
+    },
+    canShowCards() {
+      let stage = this.gameState.game_stage;
+      return stage.type=='turns'&&stage.currentPlayer.id==this.gameState.you.id
     },
     cardContent() {
       let cardData = this.cardData;
@@ -148,6 +157,9 @@ export default {
   methods: {
     showCard: function () {
       if (!this.yourCard) return;
+      if(!this.canShowCards) return;
+      if(this.cardData.show) return;
+      
       this.socket.emit(
         "demonstration",
         {

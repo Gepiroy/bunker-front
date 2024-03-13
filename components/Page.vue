@@ -16,6 +16,7 @@
     <card-holder
       :cardsData="gameState.you.cards"
       yourCards="true"
+      :glow="gameState.gameStage.type=='turns' && gameState.gameStage.currentPlayer.id==gameState.you.id"
     />
     <admin-panel v-if="gameState.you.id == Object.keys(gameState.others)[0]" />
     <overlay-card-shown></overlay-card-shown>
