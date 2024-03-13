@@ -4,14 +4,13 @@ import PageOverlay from "../PageOverlay.vue";
 
 <template>
   <page-overlay dem_key="vote">
-    <h1 class="who-is-showing">{{ by.name }} показывает карту:</h1>
-    <Card :cardData="cardData"></Card>
-    <button v-if="by.id === gameState.you.id" v-bind:onClick="endShow">Завершить показ</button>
+    <h1 class="vote-header">ГОЛОСОВАНИЕ</h1>
+    
   </page-overlay>
 </template>
 
 <style scoped>
-.who-is-showing {
+.vote-header {
   color: #fff;
 }
 </style>

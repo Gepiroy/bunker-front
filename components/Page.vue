@@ -11,6 +11,7 @@
     <div v-for="(player, index) in gameState.others" :key="index">
       <h2>{{ player.name + (player.id==gameState.you.id?' (ты)':'') }}</h2>
       <card-holder :cardsData="player.cards" :glow="gameState.gameStage.type=='turns' && gameState.gameStage.currentPlayer.id==player.id" />
+      <voting-element v-if="gameState.gameStage.type=='voting'" :player="player"></voting-element>
     </div>
     <h1>Ты (<change-name :current_name="gameState.you.name" />):</h1>
     <card-holder
