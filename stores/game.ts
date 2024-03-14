@@ -1,33 +1,42 @@
 export const useGameStore = defineStore("gameStore", {
   state: () => ({
-    game_state: null as any,
-    game_stage: null as any,
-    others: null as any,
-    you: null as any,
+    _game_state: null as any,
+    _game_stage: null as any,
+    _others: null as any,
+    _you: null as any,
   }),
   actions: {
     update(gameState: any) {
-      this.game_state = gameState.game_state;
-      this.game_stage = gameState.game_stage;
-      this.others = gameState.others;
-      this.you = gameState.you;
+      this._game_state = gameState.game_state;
+      this._game_stage = gameState.game_stage;
+      this._others = gameState.others;
+      this._you = gameState.you;
     },
     updateStage(gameStage: any) {
-      this.game_stage = gameStage;
+      this._game_stage = gameStage;
     },
     updateDemonstration(dem: any) {
-      this.game_state!.demonstration = dem;
+      this._game_state!.demonstration = dem;
     },
   },
   getters: {
     getPlayerById: (state) => {
       return (id: string) => {
-        if (state.you.id === id) return state.you;
-        return state.others[id];
+        if (state._you.id === id) return state._you;
+        return state._others[id];
       };
     },
+    game_state(): any {
+      return this._game_state;
+    },
     gameStage(): any {
-      return this.game_stage;
+      return this._game_stage;
+    },
+    you(): any {
+      return this._you;
+    },
+    others(): any {
+      return this._others;
     },
   },
 });

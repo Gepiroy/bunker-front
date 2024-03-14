@@ -1,25 +1,27 @@
-<script setup></script>
+<script setup>
+import socketHandler from '~/services/socketHandler';
+</script>
 
 <template>
-  <main v-if="gameState.game_state">
-    <Card :cardData="gameState.game_state.apocalypse"></Card>
+  <main v-if="game.game_state">
+    <Card :cardData="game.game_state.apocalypse"></Card>
     <h1>Бункер:</h1>
-    <card-holder :cardsData="gameState.game_state.bunker_modificators" />
+    <card-holder :cardsData="game.game_state.bunker_modificators" />
     <h1>Факты:</h1>
-    <card-holder :cardsData="gameState.game_state.facts" />
+    <card-holder :cardsData="game.game_state.facts" />
     <h1>Игроки:</h1>
-    <div v-for="(player, index) in gameState.others" :key="index">
-      <h2>{{ player.name + (player.id==gameState.you.id?' (ты)':'') + (player.isCandidate?'':' (изгнан)') }}</h2>
-      <card-holder :cardsData="player.cards" :glow="gameState.gameStage.type=='turns' && gameState.gameStage.currentPlayer.id==player.id" />
-      <voting-element v-if="gameState.gameStage.type=='voting'" :player="player"></voting-element>
+    <div v-for="(player, index) in game.others" :key="index">
+      <h2>{{ player.name + (player.id==game.you.id?' (ты)':'') + (player.isCandidate?'':' (изгнан)') }}</h2>
+      <card-holder :cardsData="player.cards" :glow="game.gameStage.type=='turns' && game.gameStage.currentPlayer.id==player.id" />
+      <voting-element v-if="game.gameStage.type=='voting'" :player="player"></voting-element>
     </div>
-    <h1>Ты (<change-name :current_name="gameState.you.name" />):</h1>
+    <h1>Ты (<change-name :current_name="game.you.name" />):</h1>
     <card-holder
-      :cardsData="gameState.you.cards"
+      :cardsData="game.you.cards"
       yourCards="true"
-      :glow="gameState.gameStage.type=='turns' && gameState.gameStage.currentPlayer.id==gameState.you.id"
+      :glow="game.gameStage.type=='turns' && game.gameStage.currentPlayer.id==game.you.id"
     />
-    <admin-panel v-if="gameState.you.id == Object.keys(gameState.others)[0]" />
+    <admin-panel v-if="game.you.id == Object.keys(game.others)[0]" />
     <overlay-card-shown></overlay-card-shown>
     <alerts-layout></alerts-layout>
   </main>
@@ -37,27 +39,12 @@ main {
 export default {
   data() {
     return {
-      gameState: useGameStore(),
+      game: useGameStore(),
     };
   },
   mounted() {
     this.socket = this.$nuxtSocket({ persist: "main" });
-    this.socket.on("game-state", (msg, cb) => {
-      console.log("recieved game-state message on socket:");
-      console.log(msg)
-      this.gameState.update(msg);
-      console.log("game state updated.");
-    });
-    this.socket.on("game-stage", (msg, cb) => {
-      console.log("updated game-stage:",msg);
-      this.gameState.updateStage(msg);
-      console.log("game state updated.");
-    });
-    this.socket.on("demonstration", (msg, cb) => {
-      console.log('got demonstration:')
-      console.log(msg)
-      this.gameState.updateDemonstration(msg)
-    });
+    socketHandler(this.socket);
   },
   methods: {
     collectCards(scope) {

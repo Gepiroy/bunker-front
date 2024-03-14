@@ -24,12 +24,19 @@
 </style>
 
 <script>
+const num = ref(1)
 export default {
   components: true,
   props: {
-    cardsData: Object,
+    cardsData: null,
     yourCards: false,
     glow: false
   },
+  beforeMount(){
+    console.log('beforeMount CardHolder with data:',this.cardsData)
+  },
+  mounted(){
+    console.log('mounted CardHolder with data:',this.cardsData)
+  }
 };
 </script>

@@ -3,7 +3,7 @@
 <template>
   <article
     class="card"
-    :class="{ shown: cardData.show, apocard:cardData.scheme.type==9 }"
+    :class="{ shown: cardData.show, apocard: cardData.scheme.type == 9 }"
     :style="'border-color: ' + cardType.color + ';'"
     v-on:click="showCard"
   >
@@ -45,12 +45,12 @@
   box-shadow: 1px 2px 4px 0px #000;
   user-select: none;
 }
-.apocard{
+.apocard {
   width: 250px;
   min-height: 375px;
   align-self: center;
 }
-.apocard .card-content{
+.apocard .card-content {
   font-size: 12px;
   padding: 12px 2px;
 }
@@ -101,10 +101,10 @@
 import CardTypes from "~/game/CardTypes";
 export default {
   components: true,
-  data () {
+  data() {
     return {
-      gameState: useGameStore()
-    }
+      game: useGameStore(),
+    };
   },
   mounted() {
     this.socket = this.$nuxtSocket({ persist: "main" });
@@ -118,8 +118,10 @@ export default {
       return CardTypes[this.cardData.scheme.type];
     },
     canShowCards() {
-      let stage = this.gameState.game_stage;
-      return stage.type=='turns'&&stage.currentPlayer.id==this.gameState.you.id
+      let stage = this.game.gameStage;
+      return (
+        stage.type == "turns" && stage.currentPlayer.id == this.game.you.id
+      );
     },
     cardContent() {
       let cardData = this.cardData;
@@ -157,16 +159,13 @@ export default {
   methods: {
     showCard: function () {
       if (!this.yourCard) return;
-      if(!this.canShowCards) return;
-      if(this.cardData.show) return;
-      
-      this.socket.emit(
-        "demonstration",
-        {
-          type: 'show-card',
-          card_id: this.cardData.id,
-        }
-      );
+      if (!this.canShowCards) return;
+      if (this.cardData.show) return;
+
+      this.socket.emit("demonstration", {
+        type: "show-card",
+        card_id: this.cardData.id,
+      });
     },
   },
 };
