@@ -30,7 +30,7 @@ export default {
   props: {
     cardsData: null,
     yourCards: false,
-    glow: false
+    glow: false,
   },
   beforeMount(){
     console.log('beforeMount CardHolder with data:',this.cardsData)

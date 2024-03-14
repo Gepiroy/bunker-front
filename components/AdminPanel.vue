@@ -4,6 +4,7 @@
   <div class="admin-panel">
     <button @click="startGame">Start game</button>
     <button @click="endStage">End stage</button>
+    <button @click="skipTurn">Skip turn</button>
   </div>
 </template>
 
@@ -38,6 +39,9 @@ export default {
     },
     endStage() {
       this.socket.emit("end-stage");
+    },
+    skipTurn() {
+      this.socket.emit("skip-turn");
     },
   },
 };

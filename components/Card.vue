@@ -45,10 +45,27 @@
   box-shadow: 1px 2px 4px 0px #000;
   user-select: none;
 }
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+@keyframes apocard-shadow{
+  0%{
+    box-shadow: 0px 0px 40px 0px #ff0;
+  }
+  50%{
+    box-shadow: 0px 0px 40px 0px #f00;
+  }
+  100%{
+    box-shadow: 0px 0px 40px 0px #ff0;
+  }
+}
 .apocard {
   width: 250px;
   min-height: 375px;
   align-self: center;
+  animation: apocard-shadow 2s forwards infinite;
 }
 .apocard .card-content {
   font-size: 12px;

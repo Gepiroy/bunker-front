@@ -1,3 +1,11 @@
+:root{
+  --light-back1: #fff;
+  --light-text1: #000;
+
+  --back1: var(--light-back1);
+  --text1: var(--light-text1);
+}
+
 @font-face {
   font-family: roboto;
   src: url('~/assets/fonts/Roboto-Regular.ttf');
@@ -5,15 +13,16 @@
 body{
   margin: 0;
 }
-main{
-  padding: 20px 10px;
-}
 p, a, h1, h2, h3, h4, h5, h6{
   margin: 0;
+  padding: 0;
   font-family: roboto;
   font-weight: 500;
 }
 input, button{
   padding: 4px 8px;
   border-radius: 8px;
+}
+.global-container{
+  padding: 0 20px;
 }
