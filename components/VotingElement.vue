@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <article class="vote-line">
+  <article class="vote-line" :class="{'your-line':game.you.id==player.id}">
     <button @click="doVote">Проголосовать</button>
     <span v-for="(voter, index) in votes" :key="index">{{ voter }}</span>
   </article>
@@ -15,12 +15,22 @@
   background: rgba(0, 0, 255, 0.25);
   align-items: center;
 }
+.your-line{
+  background: rgba(128, 128, 128, 0.3);
+}
 .vote-line span{
   padding: 4px;
   background: rgba(0, 255, 255, 0.25);
   user-select: none;
   border-radius: 4px;
   border: 1px solid #007777;
+}
+.your-line span{
+  padding: 4px;
+  background: rgba(255, 128, 0, 0.25);
+  user-select: none;
+  border-radius: 4px;
+  border: 1px solid #773300;
 }
 </style>
 <script>
