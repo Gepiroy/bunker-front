@@ -41,7 +41,7 @@ import socketHandler from "~/services/socketHandler";
         />
       </div>
     </div>
-    <admin-panel v-if="game.you.id == Object.keys(game.others)[0]" />
+    <admin-panel v-if="game.you.id == game.game_state.admin?.id" />
     <overlay-card-shown></overlay-card-shown>
     <alerts-layout></alerts-layout>
   </main>

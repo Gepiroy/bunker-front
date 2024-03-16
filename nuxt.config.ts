@@ -10,6 +10,7 @@ export default defineNuxtConfig({
       {
         name: "main",
         url: "http://26.215.229.91:81",
+        //url: "https://search-anime-subcommittee-ghana.trycloudflare.com",
         default: true,
       },
     ],
