@@ -20,7 +20,7 @@ const CardTypes = [
   new CardType("Рюкзак", "#840"),
   new CardType("Личный факт", "#48a"),
   new CardType("Факт", "#096"),
-  new CardType("Способность", "#808"),
+  new CardType("Возможность", "#808"),
   new CardType("Бункер", "#000"),
   new CardType("Апокалипсис", "#e30"),
 ];

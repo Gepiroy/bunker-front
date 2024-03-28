@@ -3,5 +3,5 @@ import Page from "./components/Page.vue"
 </script>
 
 <template>
-  <Page></Page>
+  <NuxtPage></NuxtPage>
 </template>
